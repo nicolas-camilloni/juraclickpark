@@ -1,0 +1,24 @@
+.titleHeader {
+    margin-left: 10vw;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    font-size: 18px;
+    margin-right: 40px;
+}
+
+.headerNavText {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+}
+
+.rightMargNav {
+    margin-right: 10vw;
+}
+
+.titleCorps {
+    font-size: 1.4rem;
+}
+
+.cardRound {
+    border-radius: 30px;
+}

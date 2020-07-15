@@ -1,0 +1,16 @@
+.footer-top {
+    background-color: whitesmoke;
+}
+
+.footer-bot {
+    background-color: #262626;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-bot p {
+    color: white;
+    margin: 0;
+}
