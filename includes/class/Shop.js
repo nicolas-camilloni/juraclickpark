@@ -1,0 +1,7 @@
+// class Shop {
+//     constructor() {}
+
+//     generateShop() {
+
+//     }
+// }

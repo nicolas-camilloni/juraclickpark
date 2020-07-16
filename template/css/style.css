@@ -1,3 +1,12 @@
+body {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 main {
     background-image: url("../img/bg.jpg") ;
     background-size: cover;
@@ -5,6 +14,7 @@ main {
     top: 0;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
 }
 
 .white {
@@ -40,17 +50,21 @@ main {
 }
 
 .leftMenu {
-    height: 80%;
-    width: 80%;
+    height: 90%;
+    width: 90%;
     border-radius: 20px;
+    z-index: 999;
+    background-image: url(../img/wood-panel.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
 }
 
-.leftMenu img {
+/* .leftMenu img {
     max-height: 100%;
     min-height: 80%;
     max-width: 100%;
     border-radius: 20px;
-}
+} */
 
 .topInterface {
     height: 20vh;
@@ -72,10 +86,347 @@ main {
     max-height: 100%;
 }
 
+.cGame {
+    display: flex;
+}
+
 .cleftMenu {
     height: 80vh;
-    width: 50vw;
+    width: 40vw;
     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cRight {
+    height: 80vh;
+    width: 60vw;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* background-color: aliceblue; */
+}
+
+#dino {
+    /* background-image: url(../img/sprites/dino1/Walk1.png); */
+    position: relative;
+    /* margin-right: 400px; */
+    margin-left: 200vw;
+    right: 0;
+    max-width: 50%;
+}
+
+#character {
+    /* background-image: url(../img/sprites/dino1/Walk1.png); */
+    position: relative;
+    /* margin-right: 400px; */
+    margin-left: -80vw;
+    z-index: 1;
+    left: 0;
+    max-width: 50%;
+}
+
+.cHealthBar {
+    border: 8px solid #663399;
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    z-index: 5;
+}
+
+.cHealthBarInner {
+    background-color: rgb(240, 79, 67);
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    z-index: 4;
+    width: 22vw;
+}
+
+@media (min-width: 576px) { 
+    .cHealthBar {
+        width: 22vw;
+        height: 4vh;
+        position: absolute;
+        top: 44vh;
+        margin-left: 34vw;
+    }
+
+    .cHealthBarInner {
+        background-color: rgb(240, 79, 67);
+        height: 4vh;
+        position: absolute;
+        top: 44vh;
+        margin-left: 34vw;
+    }
+}
+
+@media (min-width: 768px) { 
+    .cHealthBar {
+        width: 22vw;
+        height: 5vh;
+        position: absolute;
+        top: 40vh;
+        margin-left: 34vw;
+    }
+
+    .cHealthBarInner {
+        background-color: rgb(240, 79, 67);
+        height: 5vh;
+        position: absolute;
+        top: 40vh;
+        margin-left: 34vw;
+    }
+
+    .cHealthBar img {
+        height: 84px;
+        width: 84px;
+        margin-top: -28px;
+        margin-left: -34px;
+    }
+}
+
+@media (min-width: 992px) { 
+    .cHealthBar {
+        width: 22vw;
+        height: 5vh;
+        position: absolute;
+        top: 39vh;
+        margin-left: 32vw;
+    }
+
+    .cHealthBarInner {
+        background-color: rgb(240, 79, 67);
+        height: 5vh;
+        position: absolute;
+        top: 39vh;
+        margin-left: 32vw;
+    }
+
+    .cHealthBar img {
+        height: 68px;
+        width: 68px;
+        margin-top: -22px;
+        margin-left: -34px;
+    }
+}
+
+@media (min-width: 1200px) { 
+    .cHealthBar {
+        width: 22vw;
+        height: 5vh;
+        position: absolute;
+        top: 30vh;
+        margin-left: 30vw;
+    }
+
+    .cHealthBarInner {
+        background-color: rgb(240, 79, 67);
+        height: 5vh;
+        position: absolute;
+        top: 30vh;
+        margin-left: 30vw;
+    }
+
+    .cHealthBar img {
+        height: 84px;
+        width: 84px;
+        margin-top: -28px;
+        margin-left: -34px;
+    }
+}
+
+.coinsEarning {
+    display: flex;
+    position: absolute;
+    z-index: 5;
+    animation: earningAppend 500ms ease-in-out;
+}
+
+.coinsEarning p {
+    font-size: 34px;
+    color: white;
+}
+
+.coinsEarning img {
+    height: 50px;
+    width: 44px;
+    margin-left: 6px;
+}
+
+@keyframes earningAppend {
+  0% {
+    padding-left: -20px;
+    padding-bottom: -20px;
+    opacity: 0;
+  }
+
+  50% {
+    padding-left: 0px;
+    padding-bottom: 0px;
+    opacity: 1;
+  }
+
+  100% {
+    padding-left: 10px;
+    padding-bottom: 10px;
+    opacity: 0;
+  }
+}
+
+.myGold {
+    display: flex;
+    position: absolute;
+    color: gold;
+    font-weight: bold;
+    font-size: 1.8vw;
+}
+
+.myGold p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+}
+
+.myGold img {
+    max-height: 44px;
+    max-width: 44px;
+    margin-left: 6px;
+}
+
+.perks {
+    height: 12vh;
+    width: 96%;
+    background-image: url(../img/wood-texture.jpg);
+    position: relative;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 5px solid #d8b54f;
+}
+
+.woodPanel {
+    height: 50vh;
+    width: 70%;
+    margin-top: 12vh;
+    margin-left: 5vw;
+    overflow: scroll;
+    overflow-x: hidden;
+}
+
+/* width */
+.woodPanel::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.woodPanel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+.woodPanel::-webkit-scrollbar-thumb {
+  background: rgb(21, 179, 21);
+}
+
+/* Handle on hover */
+.woodPanel::-webkit-scrollbar-thumb:hover {
+  background: rgb(25, 199, 25);
+}
+
+/* PERKS */
+
+.cPerksInfos {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.cPerksInfos p {
+    margin: 0;
+}
+
+.perksName {
+    font-size: 18px;
+    color: black;
+    font-weight: bold;
+}
+
+.perksDesc {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
+    justify-content: center;
+    color: rgb(21, 179, 21);
+    font-weight: bold;
+    padding-left: 14px;
+}
+
+.cPerksPrice {
+    display: flex;
+    margin-top: 6px;
+}
+
+.cPerksPrice img {
+    height: 24px;
+    width: 24px;
+}
+
+.perksPrice {
+    color: gold;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnBuyPerks {
+    height: 40%;
+    color: white;
+    font-weight: bold;
+    width: 80%;
+    background-color: goldenrod;
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cPerksInfos button:hover {
+    transform: scale(1.05);
+    transition: all 250ms ease-in-out;
+}
+
+.cPerksInfos button:not(:hover) {
+    transform: scale(1);
+    transition: all 250ms ease-in-out;
+}
+
+.cPerksInfos button:focus {
+    outline: none;
+}
+
+.perksImg {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    justify-content: center;
+    padding-left: 14px;
+}
+
+.perksImg img {
+    height: 64px;
+    width: 64px;
+    border: 2px solid white;
+    border-radius: 50px;
+}
+
+.perksBuy {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    height: 100%;
     justify-content: center;
     align-items: center;
 }
