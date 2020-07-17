@@ -5,6 +5,7 @@ body {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    overflow: hidden;
 }
 
 main {
@@ -243,7 +244,8 @@ main {
 
 .coinsEarning p {
     font-size: 34px;
-    color: white;
+    color: gold;
+    text-shadow: -2px 0 goldenrod, 0 2px goldenrod, 2px 0 goldenrod, 0 -2px goldenrod;
 }
 
 .coinsEarning img {
@@ -293,14 +295,30 @@ main {
     margin-left: 6px;
 }
 
-.perks {
+.perksClicker {
     height: 12vh;
     width: 96%;
-    background-image: url(../img/wood-texture.jpg);
+    background-image: url(../img/clickerperks-texture.jpg);
+    background-size: 100%;
     position: relative;
+    margin-top: 24px;
+    margin-left: 4px;
     margin-bottom: 10px;
     border-radius: 20px;
-    border: 5px solid #d8b54f;
+    border: 5px solid whitesmoke;
+}
+
+.perksIdle {
+    height: 12vh;
+    width: 96%;
+    background-image: url(../img/clickerperks-texture.jpg);
+    background-size: 100%;
+    position: relative;
+    margin-top: 24px;
+    margin-left: 4px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 5px solid whitesmoke;
 }
 
 .woodPanel {
@@ -342,10 +360,11 @@ main {
 
 .cPerksInfos p {
     margin: 0;
+    font-size: 1vw;
 }
 
 .perksName {
-    font-size: 18px;
+    font-size: 1vw;
     color: black;
     font-weight: bold;
 }
@@ -356,7 +375,8 @@ main {
     width: 40%;
     height: 100%;
     justify-content: center;
-    color: rgb(21, 179, 21);
+    color: #663399;
+    font-size: 1vw;
     font-weight: bold;
     padding-left: 14px;
 }
@@ -366,13 +386,20 @@ main {
     margin-top: 6px;
 }
 
-.cPerksPrice img {
+.btnBuyPerks img {
     height: 24px;
     width: 24px;
 }
 
-.perksPrice {
-    color: gold;
+.btnUnlockPerks img {
+    height: 24px;
+    width: 24px;
+}
+
+.perksEarning {
+    color: #21c1e9;
+    text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
+    font-size: 1.2vw;
     font-weight: bold;
     display: flex;
     justify-content: center;
@@ -380,14 +407,29 @@ main {
 }
 
 .btnBuyPerks {
-    height: 40%;
+    height: 60%;
     color: white;
     font-weight: bold;
     width: 80%;
-    background-color: goldenrod;
+    background-color: #379efa;
     border: 2px solid whitesmoke;
     border-radius: 20px;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnUnlockPerks {
+    height: 60%;
+    color: white;
+    font-weight: bold;
+    width: 80%;
+    background-color: #52cbb6;
+    border: 2px solid whitesmoke;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -429,4 +471,14 @@ main {
     height: 100%;
     justify-content: center;
     align-items: center;
+    font-size: 1.1vw;
+    line-height: 1.1vw;
+}
+
+.btnBuyPerks p {
+    font-size: 0.7vw;
+}
+
+.btnUnlockPerks p {
+    font-size: 0.7vw;
 }

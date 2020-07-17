@@ -8,12 +8,19 @@ class Game {
         var isNewPlayer = localStorage.getItem('isNewPlayer');
         if (isNewPlayer == null) {
 
-            var cDinoPunch = { name: "DinoPunch", rank1: { bonus: 10, price: 100 }, rank2: { bonus: 20, price: 200 }, rank3: { bonus: 30, price: 300 }, rank4: { bonus: 40, price: 500 }, rank5: { bonus: 50, price: 700 }, rank6: { bonus: 60, price: 1000 }, rank7: { bonus: 70, price: 1400 }, rank8: { bonus: 80, price: 2000 }, rank9: { bonus: 90, price: 3000 }, rank10: { bonus: 100, price: 5000 }, currentRank: "", unlocked: false, needWorld: 1 };
+            // CLICKER PERKS
 
-            var iCoupDeMassue = { name: "Coup de massue", rank1: { bonus: 10, price: 100 }, rank2: { bonus: 20, price: 200 }, rank3: { bonus: 30, price: 300 }, rank4: { bonus: 40, price: 500 }, rank5: { bonus: 50, price: 700 }, rank6: { bonus: 60, price: 1000 }, rank7: { bonus: 70, price: 1400 }, rank8: { bonus: 80, price: 2000 }, rank9: { bonus: 90, price: 3000 }, rank10: { bonus: 100, price: 5000 }, currentRank: "", unlocked: false, needWorld: 1 };
+            var DinoPunch = { fullname: "DinoPunch", name: "DinoPunch", price: 5, bonus: 1, priceExpo: 0.26, bonusExpo: 0.20, totalbonus: 1, unlocked: false, needWorld: 1 };
 
-            var perks = { perksOne: cDinoPunch, perksTwo: iCoupDeMassue};
-            var perks = JSON.stringify(perks);
+            // IDLE PERKS
+
+            var CoupDeMassue = { fullname: "CoupDeMassue", name: "Coup de massue", price: 5, bonus: 1, priceExpo: 0.26, bonusExpo: 0.20, totalbonus: 1, unlocked: false, needWorld: 1 };
+
+            var perksClicker = { DinoPunch: DinoPunch, CoupDeMassue: CoupDeMassue};
+            var perksClicker = JSON.stringify(perksClicker);
+
+            var perksIdle = { perksOne: DinoPunch, perksTwo: CoupDeMassue };
+            var perksIdle = JSON.stringify(perksIdle);
 
             localStorage.setItem("isNewPlayer", "no");
             localStorage.setItem("dinocoins", "0");
@@ -22,12 +29,16 @@ class Game {
             localStorage.setItem("currentWorld", "1");
             localStorage.setItem("clickEarning", "10");
             localStorage.setItem("idleEarning", "0");
-            localStorage.setItem("perks", perks);
+            localStorage.setItem("perksClicker", perksClicker);
+            localStorage.setItem("perksIdle", perksIdle);
             this.player = new Player;
         }
         this.dinosaur = new Dinosaur(this.player);
+        this.shop = new Shop();
         var player = this.player;
         var dinosaur = this.dinosaur;
+        var shop = this.shop;
+        var test = shop.generateShop("clicker");
         // console.log(player.characterLevel);
         // console.log(dinosaur.currentDino);
         this.dinoWalk("template/img/sprites/" + dinosaur.currentDino + "/", dinosaur, player, true);
@@ -37,7 +48,8 @@ class Game {
     }
 
     displayMyGold(player = this.player) {
-        $("#displayMyGold").html(player.dinocoins);
+        var myGold = this.shop.prettify(parseInt(player.dinocoins));
+        $("#displayMyGold").html(myGold);
     }
 
     newDino(dinosaur, player) {
@@ -57,9 +69,11 @@ class Game {
     detectClickPosition(event, player = this.player) {
         var randomNumber = Math.floor(Math.random() * Math.floor(2000));
         console.log(player);
+        var coinsEarned = this.shop.prettify(player.clickEarning);
+        
         $("main").append(`
             <div class=" coinsEarning ${randomNumber}">
-                <p>+${player.clickEarning} </p>
+                <p>+${coinsEarned} </p>
                 <img src="template/img/dinocoins.png" alt="dinocoins">
             </div>
         `);
@@ -176,17 +190,24 @@ class Game {
 
     charIdle(path, player) {
         var i = 1;
+        var y = 1;
         var idle = setInterval( () => {
             if (i < 5) {
                 $("#character").attr("src", path + "Idle" + i + ".png");
             }
             if (i == 5) {
                 i = 1;
+            }
+            else {
+                i++;
+            }
+            if ( y == 15) {
+                y = 1;
                 clearInterval(idle);
                 this.charAttack("template/img/sprites/char" + player.characterLevel + "/", player);
             }
             else {
-                i++;
+                y++;
             }
         }, 200);
 
@@ -204,7 +225,7 @@ class Game {
             else {
                 i++;
             }
-        }, 100);
+        }, 75);
     }
 
 }
