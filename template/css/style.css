@@ -9,8 +9,7 @@ body {
 }
 
 main {
-    background-image: url("../img/bg.jpg") ;
-    background-size: cover;
+    background-size: 100% 100%;
     min-height: 100vh;
     top: 0;
     display: flex;
@@ -55,9 +54,37 @@ main {
     width: 90%;
     border-radius: 20px;
     z-index: 999;
-    background-image: url(../img/wood-panel.png);
+    background-image: url(../img/wood-panel-clicker.png);
     background-size: 100% 100%;
     background-repeat: no-repeat;
+}
+
+.ongletsPanel {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    /* background-color: goldenrod; */
+}
+
+.ongletClicker {
+    width: 4vw;
+    height: 7vh;
+    margin: 1.4vw 0 0 6.2vw;
+    /* background-color: goldenrod; */
+}
+
+.ongletIdle {
+    width: 4vw;
+    height: 7vh;
+    margin: 1.4vw 0 0 1.4vw;
+    /* background-color: goldenrod; */
+}
+
+.ongletSkin {
+    width: 4vw;
+    height: 7vh;
+    margin: 1.4vw 0 0 1.4vw;
+    /* background-color: goldenrod; */
 }
 
 /* .leftMenu img {
@@ -72,6 +99,7 @@ main {
     width: 100%;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .gold-panel {
@@ -85,6 +113,21 @@ main {
 .gold-panel img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.map-btn {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    right: 44px;
+}
+
+.img-map {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .cGame {
@@ -460,7 +503,6 @@ main {
 .perksImg img {
     height: 64px;
     width: 64px;
-    border: 2px solid white;
     border-radius: 50px;
 }
 
@@ -481,4 +523,83 @@ main {
 
 .btnUnlockPerks p {
     font-size: 0.7vw;
+}
+
+/* MODAL MAP */
+
+.cModalMap {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modalMap {
+    position: relative;
+    background-image: url(../img/map/map-bg.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width:  74vw;
+    height: 90vh;
+    z-index: 9999;
+}
+
+#map1Selector {
+    left: 7.5%;
+    top: 60.5%;
+}
+
+#map2Selector {
+    left: 28%;
+    top: 80%;
+}
+
+#map3Selector {
+    left: 77%;
+    top: 71.5%;
+}
+
+#map4Selector {
+    left: 86%;
+    top: 52%;
+}
+
+#map5Selector {
+    left: 68.5%;
+    top: 35.5%;
+}
+
+#map6Selector {
+    left: 60%;
+    top: 17.5%;
+}
+
+#map7Selector {
+    left: 44.5%;
+    top: 2.5%;
+}
+
+#map8Selector {
+    left: 45%;
+    top: 59.5%;
+}
+
+#map9Selector {
+    left: 13.5%;
+    top: 41.5%;
+}
+
+#map10Selector {
+    left: 27.5%;
+    top: 16.5%;
+}
+
+
+.divSelector {
+    position: absolute;
+    height: 12vh;
+    width: 7vw;
+    background-color: aquamarine;
 }

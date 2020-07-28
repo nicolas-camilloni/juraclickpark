@@ -6,6 +6,8 @@ class Player {
         this.dinocoins = localStorage.getItem("dinocoins");
         this.clickEarning = localStorage.getItem("clickEarning");
         this.idleEarning = localStorage.getItem("idleEarning");
+        this.clickDamage = localStorage.getItem("clickDamage");
+        this.idleDamage = localStorage.getItem("idleDamage");
         // console.log(this);
     }
 

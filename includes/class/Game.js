@@ -4,22 +4,39 @@ class Game {
         this.player = new Player;
     }
 
+    // INITIALIZE THE GAME
+
     initGame() {
         var isNewPlayer = localStorage.getItem('isNewPlayer');
         if (isNewPlayer == null) {
 
             // CLICKER PERKS
 
-            var DinoPunch = { fullname: "DinoPunch", name: "DinoPunch", price: 5, bonus: 1, priceExpo: 0.26, bonusExpo: 0.20, totalbonus: 1, unlocked: false, needWorld: 1 };
+            var DinoPunch = { img: "dinoPunch.png", type: "clicker", fullname: "DinoPunch", name: "DinoPunch", price: 5, bonus: 1, rateGrowth: 1.24, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+            
+            var CoupDeMassue = { img: "coupDeMassue.png", type: "clicker", fullname: "CoupDeMassue", name: "Coup de massue", price: 5, bonus: 1, rateGrowth: 1.24, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+
+            var silex = { img: "silex.png", type: "clicker", fullname: "silex", name: "Silex", price: 5, bonus: 1, rateGrowth: 1.38, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+
+            var lanceEnPierre = { img: "lanceEnPierre.png", type: "clicker", fullname: "lanceEnPierre", name: "Lance en pierre", price: 5, bonus: 1, rateGrowth: 1.42, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+
 
             // IDLE PERKS
 
-            var CoupDeMassue = { fullname: "CoupDeMassue", name: "Coup de massue", price: 5, bonus: 1, priceExpo: 0.26, bonusExpo: 0.20, totalbonus: 1, unlocked: false, needWorld: 1 };
+            var pluieDeMeteore = { img: "pluieDeMeteore.png", type: "idle", fullname: "PluieDeMeteore", name: "Pluie de météore", price: 5, bonus: 1, rateGrowth: 1.24, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+            
+            var erruption = { img: "erruption.png", type: "idle", fullname: "erruption", name: "Erruption volcanique", price: 5, bonus: 1, rateGrowth: 1.28, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
 
-            var perksClicker = { DinoPunch: DinoPunch, CoupDeMassue: CoupDeMassue};
+            var sandstorm = { img: "sandstorm.png", type: "idle", fullname: "sandstorm", name: "Tempête de sable", price: 5, bonus: 1, rateGrowth: 1.34, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+
+            var feuDeCamp = { img: "feuDeCamp.png", type: "idle", fullname: "feuDeCamp", name: "Maîtrise du feu", price: 5, bonus: 1, rateGrowth: 1.38, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+
+            var flecheEnflamee = { img: "flecheEnflamee.png", type: "idle", fullname: "flecheEnflamee", name: "Flèche enflamée", price: 5, bonus: 1, rateGrowth: 1.42, level: 0, totalbonus: 1, unlocked: false, needWorld: 1 };
+
+            var perksClicker = { DinoPunch: DinoPunch, CoupDeMassue: CoupDeMassue, silex: silex, lanceEnPierre: lanceEnPierre};
             var perksClicker = JSON.stringify(perksClicker);
 
-            var perksIdle = { perksOne: DinoPunch, perksTwo: CoupDeMassue };
+            var perksIdle = { PluieDeMeteore: pluieDeMeteore, erruption: erruption, sandstorm: sandstorm, feuDeCamp: feuDeCamp, flecheEnflamee: flecheEnflamee };
             var perksIdle = JSON.stringify(perksIdle);
 
             localStorage.setItem("isNewPlayer", "no");
@@ -27,8 +44,10 @@ class Game {
             localStorage.setItem("characterLevel", "1");
             localStorage.setItem("bestWorld", "1");
             localStorage.setItem("currentWorld", "1");
-            localStorage.setItem("clickEarning", "10");
+            localStorage.setItem("clickEarning", "1");
             localStorage.setItem("idleEarning", "0");
+            localStorage.setItem("clickDamage", 1);
+            localStorage.setItem("idleDamage", 0);
             localStorage.setItem("perksClicker", perksClicker);
             localStorage.setItem("perksIdle", perksIdle);
             this.player = new Player;
@@ -39,6 +58,8 @@ class Game {
         var dinosaur = this.dinosaur;
         var shop = this.shop;
         var test = shop.generateShop("clicker");
+        this.generateWorld(player.currentWorld);
+        this.idleEarning(dinosaur);
         // console.log(player.characterLevel);
         // console.log(dinosaur.currentDino);
         this.dinoWalk("template/img/sprites/" + dinosaur.currentDino + "/", dinosaur, player, true);
@@ -47,10 +68,230 @@ class Game {
         return player, dinosaur;
     }
 
+    // GENERATE MAP
+
+    generateMap(player) {
+        $(".cModalMap").css("display", "flex");
+        if ( player.bestWorld == 1 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 2 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 3 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 4 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 5 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map5Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 6 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map5Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map6Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 7 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map5Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map6Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map7Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 8 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-locked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map5Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map6Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map7Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map8Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 9 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-locked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map5Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map6Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map7Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map8Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map9Selector" class="divSelector"></div>`)
+        }
+        else if ( player.bestWorld == 10 ) {
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde1-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde2-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde3-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde4-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde5-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde6-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde7-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde8-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde9-unlocked.png" />`)
+            $(".modalMap").append(`<img class="img-map" src="template/img/map/monde10-unlocked.png" />`)
+            $(".modalMap").append(`<div id="map1Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map2Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map3Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map4Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map5Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map6Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map7Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map8Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map9Selector" class="divSelector"></div>`)
+            $(".modalMap").append(`<div id="map10Selector" class="divSelector"></div>`)
+        }
+    }
+
+    // GENERATE WORLD
+
+    generateWorld(level) {
+        if ( level == 1 ) {
+            $("main").css("backgroundImage", "url('template/img/bg.jpg')");
+        }
+        else if ( level == 2 ) {
+            $("main").css("backgroundImage", "url('template/img/bg2.png')");
+        }
+        else if (level == 3) {
+            $("main").css("backgroundImage", "url('template/img/bg3.jpg')");
+        }
+        else if (level == 4) {
+            $("main").css("backgroundImage", "url('template/img/bg4.jpg')");
+        }
+        else if (level == 5) {
+            $("main").css("backgroundImage", "url('template/img/bg5.png')");
+        }
+        else if (level == 6) {
+            $("main").css("backgroundImage", "url('template/img/bg6.jpg')");
+        }
+        else if (level == 7) {
+            $("main").css("backgroundImage", "url('template/img/bg7.jpg')");
+        }
+        else if (level == 8) {
+            $("main").css("backgroundImage", "url('template/img/bg8.jpg')");
+        }
+        else if (level == 9) {
+            $("main").css("backgroundImage", "url('template/img/bg9.png')");
+        }
+        else if (level == 10) {
+            $("main").css("backgroundImage", "url('template/img/bg10.png')");
+        }
+    }
+
+    // DISPLAY GOLD ON TOP OF SCREEN
+
     displayMyGold(player = this.player) {
         var myGold = this.shop.prettify(parseInt(player.dinocoins));
         $("#displayMyGold").html(myGold);
     }
+
+    // CREATE NEW DINO
 
     newDino(dinosaur, player) {
         this.dinoWalk("template/img/sprites/" + dinosaur.currentDino + "/", dinosaur, player);
@@ -58,18 +299,19 @@ class Game {
 
     // PLAYER CLICK
     playerClicked(dinosaur, player = this.player) {
-        dinosaur.dinoHealth -=20;
+        if ( parseInt(dinosaur.dinoHealth) > 0 ) {        
+            dinosaur.dinoHealth -= parseInt(player.clickEarning);
+        }
         dinosaur.updateHealthBar();
         document.addEventListener("click", this.detectClickPosition(event));
         player.updateMyCoins(player.clickEarning);
-        console.log(player);
         this.displayMyGold();
     }
 
     detectClickPosition(event, player = this.player) {
         var randomNumber = Math.floor(Math.random() * Math.floor(2000));
         console.log(player);
-        var coinsEarned = this.shop.prettify(player.clickEarning);
+        var coinsEarned = this.shop.prettify(parseInt(player.clickEarning));
         
         $("main").append(`
             <div class=" coinsEarning ${randomNumber}">
@@ -226,6 +468,30 @@ class Game {
                 i++;
             }
         }, 75);
+    }
+
+    // IDLE EARNING
+
+    idleEarning(dinosaur, player = this.player) {
+        var timingIdle = setInterval(() => {
+            if ( parseInt(dinosaur.dinoHealth) > 0 ) {        
+                dinosaur.dinoHealth -= parseInt(player.idleEarning);
+                clearInterval(timingIdle);
+                this.idleEarning(this.dinosaur);
+                dinosaur.updateHealthBar();
+            }
+            else {
+                clearInterval(timingIdle);
+                this.idleEarning(this.dinosaur);
+            }
+            console.log(dinosaur.dinoHealth);
+            var currCoin = parseInt(localStorage.getItem("dinocoins"));
+            var idleCoin = parseInt(localStorage.getItem("idleEarning"));
+            var earning = currCoin + idleCoin;
+            localStorage.setItem("dinocoins", earning);
+            this.player = new Player();
+            this.displayMyGold();
+        }, 1000);
     }
 
 }

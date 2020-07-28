@@ -7,14 +7,18 @@ class Dinosaur {
         else if ( player.currentWorld == "2" ) {
             var dinoChoice = ["dinostart", "dimetrodon"];
         }
+        else {
+            var dinoChoice = ["dinostart"];
+        }
         const randomDino = dinoChoice[Math.floor(Math.random() * dinoChoice.length)];
 
         $(".cHealthBarInner").css("width", "22vw");
-        
+        console.log(player);
+        var dinoCalcHealth = 50000;
 
         this.currentDino = randomDino;
-        this.dinoHealth = 100;
-        this.dinoMaxHealth = 100;
+        this.dinoHealth = dinoCalcHealth;
+        this.dinoMaxHealth = dinoCalcHealth;
     }
 
     updateHealthBar() {

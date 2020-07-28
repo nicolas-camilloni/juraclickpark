@@ -102,10 +102,16 @@ class Shop {
             $.each(myClickerPerks, function () {
                 // console.log(this);
                 if (this["unlocked"] == true) {
-                    var nextUpgrade = back.getNextUpgradeInfo(this["name"], this["bonus"], this["bonusExpo"]);
+                    var nextUpgrade = back.getNextUpgradeInfo(this["bonus"], this["level"]);
                     nextUpgrade = back.prettify(nextUpgrade);
-                    console.log(this);
-                    var price = back.prettify(this["price"]);
+                    var price = parseInt(this["price"]);
+                    if (Math.round(price * (this["rateGrowth"]) ** this["level"] == price)) {
+                        var costNext = costNext + 1;
+                    }
+                    else {
+                        var costNext = Math.round(price * (this["rateGrowth"]) ** this["level"]);
+                    }
+                    var nextPrice = back.prettify(costNext);
                     var bonus = back.prettify(this["bonus"]);
                     var totalbonus = back.prettify(this["totalbonus"]);
                     
@@ -113,14 +119,14 @@ class Shop {
                         <div class="perksClicker shadow">
                             <div class="cPerksInfos">
                                 <div class="perksImg">
-                                    <img class="img-fluid" src="template/img/perksOne.png" width=44 height=44 alt="Dinopunch" />
+                                    <img class="img-fluid" src="template/img/perks/${this["img"]}" width=44 height=44 alt="perkClicker" />
                                 </div>
                                 <div class="perksDesc">
                                     <p class="perksName">${this["name"]}</p>
                                     <p class="perksType">${totalbonus}/click</p>
                                 </div>
                                 <div class="perksBuy">
-                                    <button id="${this["fullname"]}" class="btnBuyPerks"><p>LVL UP</p><div>${price}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
+                                    <button id="${this["fullname"]}" class="btnBuyPerks btnBuyPerksClicker"><p>LVL UP</p><div>${nextPrice}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
                                     <p class="perksEarning">+${nextUpgrade}/click</p>
                                 </div>
                             </div>
@@ -128,21 +134,106 @@ class Shop {
                     `);
                 }
                 else {
-                    var price = back.prettify(this["price"]);
+                    var price = parseInt(this["price"]);
+                    var costNext = Math.round(price * (this["rateGrowth"]) ** this["level"]);
+                    var nextPrice = back.prettify(costNext);
                     var bonus = back.prettify(this["bonus"]);
                     var totalbonus = back.prettify(this["totalbonus"]);
                     $(".woodPanel").append(`
                         <div class="perksIdle shadow">
                             <div class="cPerksInfos">
                                 <div class="perksImg">
-                                    <img class="img-fluid" src="template/img/perksOne.png" width=44 height=44 alt="Dinopunch" />
+                                    <img class="img-fluid" src="template/img/perks/${this["img"]}" width=44 height=44 alt="perkClicker" />
                                     </div>
+                                <div class="perksDesc">
+                                    <p class="perksName">${this["name"]}</p>
+                                </div>
+                                <div class="perksBuy">
+                                    <button id="${this["fullname"]}" class="btnUnlockPerks btnUnlockPerksClicker"><p>DEBLOQUER</p><div>${nextPrice}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+            });
+        }
+        else if (whichPanel == "idle") {
+            var back = this;
+            // console.log(JSON.parse(this.perksClicker));
+            var myIdlePerks = JSON.parse(this.perksIdle);
+            // console.log(myClickerPerks["perksOne"]["price"]);
+            $.each(myIdlePerks, function () {
+                // console.log(this);
+                if (this["unlocked"] == true) {
+                    var nextUpgrade = back.getNextUpgradeInfo(this["bonus"], this["level"]);
+                    nextUpgrade = back.prettify(nextUpgrade);
+                    var price = parseInt(this["price"]);
+                    if (Math.round(price * (this["rateGrowth"]) ** this["level"] == price)) {
+                        var costNext = costNext + 1;
+                    }
+                    else {
+                        var costNext = Math.round(price * (this["rateGrowth"]) ** this["level"]);
+                    }
+                    var nextPrice = back.prettify(costNext);
+                    var bonus = back.prettify(this["bonus"]);
+                    var totalbonus = back.prettify(this["totalbonus"]);
+
+                    if ( this["type"] == "clicker" ) {
+                    $(".woodPanel").append(`
+                        <div class="perksClicker shadow">
+                            <div class="cPerksInfos">
+                                <div class="perksImg">
+                                    <img class="img-fluid" src="template/img/perks/${this["img"]}" width=44 height=44 alt="perkIdle" />
+                                </div>
                                 <div class="perksDesc">
                                     <p class="perksName">${this["name"]}</p>
                                     <p class="perksType">${totalbonus}/click</p>
                                 </div>
                                 <div class="perksBuy">
-                                    <button id="${this["fullname"]}" class="btnUnlockPerks"><p>DEBLOQUER</p><div>${price}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
+                                    <button id="${this["fullname"]}" class="btnBuyPerks btnBuyPerksIdle"><p>LVL UP</p><div>${nextPrice}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
+                                    <p class="perksEarning">+${nextUpgrade}/click</p>
+                                </div>
+                            </div>
+                        </div>
+                        `);
+                    }
+                    else if ( this["type"] == "idle" ) {
+                        $(".woodPanel").append(`
+                        <div class="perksClicker shadow">
+                            <div class="cPerksInfos">
+                                <div class="perksImg">
+                                    <img class="img-fluid" src="template/img/perks/${this["img"]}" width=44 height=44 alt="perkIdle" />
+                                </div>
+                                <div class="perksDesc">
+                                    <p class="perksName">${this["name"]}</p>
+                                    <p class="perksType">${totalbonus}/s</p>
+                                </div>
+                                <div class="perksBuy">
+                                    <button id="${this["fullname"]}" class="btnBuyPerks btnBuyPerksIdle"><p>LVL UP</p><div>${nextPrice}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
+                                    <p class="perksEarning">+${nextUpgrade}/s</p>
+                                </div>
+                            </div>
+                        </div>
+                        `);
+                    }
+                }
+                else {
+                    var price = parseInt(this["price"]);
+                    var costNext = Math.round(price * (this["rateGrowth"]) ** this["level"]);
+                    var nextPrice = back.prettify(costNext);
+                    var bonus = back.prettify(this["bonus"]);
+                    var totalbonus = back.prettify(this["totalbonus"]);
+                    $(".woodPanel").append(`
+                        <div class="perksIdle shadow">
+                            <div class="cPerksInfos">
+                                <div class="perksImg">
+                                    <img class="img-fluid" src="template/img/perks/${this["img"]}" width=44 height=44 alt="perkIdle" />
+                                    </div>
+                                <div class="perksDesc">
+                                    <p class="perksName">${this["name"]}</p>
+                                </div>
+                                <div class="perksBuy">
+                                    <button id="${this["fullname"]}" class="btnUnlockPerks btnUnlockPerksIdle"><p>DEBLOQUER</p><div>${nextPrice}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
                                 </div>
                             </div>
                         </div>
@@ -152,62 +243,78 @@ class Shop {
         }
     }
 
-    getNextUpgradeInfo(name, bonus, bonusExpo) {
-        var perksToUpgrade = JSON.parse(this.perksClicker);
+    getNextUpgradeInfo(bonus, level) {
 
-        // NEW BONUS 020
-        if (Math.round(bonus * Math.exp(bonusExpo)) == bonus) {
-            var newBonus = Math.round(bonus * Math.exp(bonusExpo)) + 1;
-        }
-        else {
-            var newBonus = Math.round(bonus * Math.exp(bonusExpo)) + 1;
-        }
+        var newBonus = Math.round(bonus * level);
 
         return newBonus;
     }
     
-    upgradePerksClicker(name, price, bonus, priceExpo, bonusExpo, isUnlock = true) {
+    upgradePerksClicker(name, price, bonus, rateGrowth, level, isUnlock = true ) {
 
-        if ( price <= parseInt(localStorage.getItem("dinocoins")) ) {
-            
+        var costNext = Math.round(price * (rateGrowth) ** level);
+        if ( costNext <= parseInt(localStorage.getItem("dinocoins")) ) {
             var perksToUpgrade = JSON.parse(this.perksClicker);
             
-            // NEW PRICE 026
-            if ( Math.round(price * Math.exp(priceExpo)) == price ) {
-                var newPrice = Math.round(price * Math.exp(priceExpo)) + 1;
-            }
-            else {
-                var newPrice = Math.round(price * Math.exp(priceExpo)) + 1;
-            }
+            // NEW BONUS
+            var productionNext = Math.round(bonus * level);
             
-            // NEW BONUS 020
-            if (Math.round(bonus * Math.exp(bonusExpo)) == bonus) {
-                var newBonus = Math.round(bonus * Math.exp(bonusExpo)) + 1;
-            }
-            else {
-                var newBonus = Math.round(bonus * Math.exp(bonusExpo)) + 1;
-            }
-            
-            var lostCoin = parseInt(localStorage.getItem("dinocoins")) - parseInt(perksToUpgrade[name]["price"]);
+            var lostCoin = parseInt(parseInt(localStorage.getItem("dinocoins")) - parseInt(costNext));
             localStorage.setItem("dinocoins", lostCoin);
 
-            
-            perksToUpgrade[name]["price"] = newPrice;
-            perksToUpgrade[name]["totalbonus"] += newBonus;
-            perksToUpgrade[name]["bonus"] = newBonus;
+            perksToUpgrade[name]["totalbonus"] += productionNext;
             if ( isUnlock == false ) {
                 perksToUpgrade[name]["unlocked"] = true;
             }
             
-            var clickEarning = parseInt(localStorage.getItem("clickEarning")) + parseInt(perksToUpgrade[name]["bonus"]);
+            var clickEarning = parseInt(localStorage.getItem("clickEarning")) + parseInt(productionNext);
+            var clickDamage = parseInt(localStorage.getItem("clickDamage")) + parseInt(productionNext);
+            perksToUpgrade[name]["level"] += 1;
 
             perksToUpgrade = JSON.stringify(perksToUpgrade);
             localStorage.setItem("clickEarning", clickEarning);
-            localStorage.setItem("perksClicker", perksToUpgrade);
-            
+            localStorage.setItem("clickDamage", clickDamage);
+            localStorage.setItem("perksClicker", perksToUpgrade);            
             // localStorage.getItem("price")
+            var player = new Player();
         }
             
+    }
+
+    upgradePerksIdle(name, price, bonus, rateGrowth, level, isUnlock = true ) {
+
+        var costNext = Math.round(price * (rateGrowth) ** level);
+        if (costNext <= parseInt(localStorage.getItem("dinocoins"))) {
+            var perksToUpgrade = JSON.parse(this.perksIdle);
+
+            // NEW BONUS
+            if ( level == 0 ) {
+                var productionNext = Math.round(bonus * 1);
+            }
+            else {
+                var productionNext = Math.round(bonus * level);
+            }
+
+            var lostCoin = parseInt(parseInt(localStorage.getItem("dinocoins")) - parseInt(costNext));
+            localStorage.setItem("dinocoins", lostCoin);
+
+            perksToUpgrade[name]["totalbonus"] += productionNext;
+            if (isUnlock == false) {
+                perksToUpgrade[name]["unlocked"] = true;
+            }
+
+            var idleEarning = parseInt(localStorage.getItem("idleEarning")) + parseInt(productionNext);
+            var idleDamage = parseInt(localStorage.getItem("idleDamage")) + parseInt(productionNext);
+            perksToUpgrade[name]["level"] += 1;
+
+            perksToUpgrade = JSON.stringify(perksToUpgrade);
+            localStorage.setItem("idleEarning", idleEarning);
+            localStorage.setItem("idleDamage", idleDamage);
+            localStorage.setItem("perksIdle", perksToUpgrade);
+            // localStorage.getItem("price")
+            var player = new Player();
+        }
+
     }
 
 }

@@ -23,11 +23,20 @@ session_start();
                     <img class="img-fluid" src="template/img/dinocoins.png" alt="dinocoins" />
                 </div>
             </div>
+            <img class="map-btn" src="template/img/map-btn.png" alt="bouton map" />
         </div>
         <div class="cGame">
             <div class="cleftMenu">
                 <div class="leftMenu">
                     <div class="woodPanel">
+                    </div>
+                    <div class="ongletsPanel">
+                        <div class="ongletClicker">
+                        </div>
+                        <div class="ongletIdle">
+                        </div>
+                        <div class="ongletSkin">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -39,6 +48,11 @@ session_start();
                 </div>
                 <div class="cHealthBarInner">
                 </div>
+            </div>
+        </div>
+        <div class="cModalMap">
+            <div class="modalMap">
+
             </div>
         </div>
     </main>

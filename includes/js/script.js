@@ -3,6 +3,9 @@ $( document ).ready(function() {
   var game = new Game;
   game.initGame();
 
+  $(".cModalMap").css("display", "none");
+
+
   $("body").click(function () {
     if (!$(event.target).closest('.leftMenu').length) {
       if (!$(event.target).closest('.btnUnlockPerks').length && !$(event.target).closest('.btnBuyPerks').length) {
@@ -11,28 +14,132 @@ $( document ).ready(function() {
     }
   })
 
-  $(document).on("click", ".btnUnlockPerks", function() {
+  $(document).on("click", ".btnUnlockPerksClicker", function() {
     console.log(this["id"]);
     var id = this["id"];
     var perksToUpgrade = JSON.parse(game.shop.perksClicker);
     console.log(perksToUpgrade);
-    game.shop.upgradePerksClicker(this["id"], perksToUpgrade[id]["price"], perksToUpgrade[id]["bonus"], perksToUpgrade[id]["priceExpo"], perksToUpgrade[id]["bonusExpo"], false);
+    game.shop.upgradePerksClicker(this["id"], perksToUpgrade[id]["price"], perksToUpgrade[id]["bonus"], perksToUpgrade[id]["rateGrowth"], perksToUpgrade[id]["level"], false);
     game.shop = new Shop();
     game.shop.generateShop("clicker");
     game.player = new Player();
     game.displayMyGold(game.player);
   })
 
-  $(document).on("click", ".btnBuyPerks", function () {
+  $(document).on("click", ".btnUnlockPerksIdle", function () {
+    console.log(this["id"]);
+    var id = this["id"];
+    var perksToUpgrade = JSON.parse(game.shop.perksIdle);
+    console.log(perksToUpgrade);
+    game.shop.upgradePerksIdle(this["id"], perksToUpgrade[id]["price"], perksToUpgrade[id]["bonus"], perksToUpgrade[id]["rateGrowth"], perksToUpgrade[id]["level"], false);
+    game.shop = new Shop();
+    game.shop.generateShop("idle");
+    game.player = new Player();
+    game.displayMyGold(game.player);
+  })
+
+  $(document).on("click", ".btnBuyPerksClicker", function () {
     console.log(this["id"]);
     var id = this["id"];
     var perksToUpgrade = JSON.parse(game.shop.perksClicker);
     console.log(perksToUpgrade);
-    game.shop.upgradePerksClicker(this["id"], perksToUpgrade[id]["price"], perksToUpgrade[id]["bonus"], perksToUpgrade[id]["priceExpo"], perksToUpgrade[id]["bonusExpo"], false);
+    game.shop.upgradePerksClicker(this["id"], perksToUpgrade[id]["price"], perksToUpgrade[id]["bonus"], perksToUpgrade[id]["rateGrowth"], perksToUpgrade[id]["level"]);
     game.shop = new Shop();
     game.shop.generateShop("clicker");
     game.player = new Player();
     game.displayMyGold(game.player);
+  })
+
+  $(document).on("click", ".btnBuyPerksIdle", function () {
+    console.log(this["id"]);
+    var id = this["id"];
+    var perksToUpgrade = JSON.parse(game.shop.perksIdle);
+    console.log(perksToUpgrade);
+    game.shop.upgradePerksIdle(this["id"], perksToUpgrade[id]["price"], perksToUpgrade[id]["bonus"], perksToUpgrade[id]["rateGrowth"], perksToUpgrade[id]["level"]);
+    game.shop = new Shop();
+    game.shop.generateShop("idle");
+    game.player = new Player();
+    game.displayMyGold(game.player);
+  })
+
+  $(document).on("click", ".ongletClicker", function () {
+    $(".leftMenu").css("backgroundImage", "url(template/img/wood-panel-clicker.png)");
+    game.shop.generateShop("clicker");
+  })
+
+  $(document).on("click", ".ongletIdle", function () {
+    $(".leftMenu").css("backgroundImage", "url(template/img/wood-panel-idle.png)");
+    game.shop.generateShop("idle");
+  })
+
+  $(document).on("click", ".ongletSkin", function () {
+    $(".leftMenu").css("backgroundImage", "url(template/img/wood-panel-skin.png)");
+    game.shop.generateShop("skin");
+  })
+
+  $(".map-btn").click(function() {
+    game.player = new Player();
+    game.generateMap(game.player);
+  })
+
+  $(document).on("click", "#map1Selector", function() {
+    localStorage.setItem("currentWorld", 1);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map2Selector", function () {
+    localStorage.setItem("currentWorld", 2);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map3Selector", function () {
+    localStorage.setItem("currentWorld", 3);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map4Selector", function () {
+    localStorage.setItem("currentWorld", 4);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map5Selector", function () {
+    localStorage.setItem("currentWorld", 5);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map6Selector", function () {
+    localStorage.setItem("currentWorld", 6);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map7Selector", function () {
+    localStorage.setItem("currentWorld", 7);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map8Selector", function () {
+    localStorage.setItem("currentWorld", 8);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map9Selector", function () {
+    localStorage.setItem("currentWorld", 9);
+    game.player = new Player();
+    game.initGame();
+  })
+
+  $(document).on("click", "#map10Selector", function () {
+    localStorage.setItem("currentWorld", 10);
+    game.player = new Player();
+    game.initGame();
   })
 
   // localStorage.removeItem("dinocoins");
