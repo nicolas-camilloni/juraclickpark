@@ -77,69 +77,110 @@ $( document ).ready(function() {
     game.shop.generateShop("skin");
   })
 
+  $(document).on("click", ".ongletMap", function () {
+    $(".leftMenu").css("backgroundImage", "url(template/img/wood-panel-map.png)");
+    game.shop.generateShop("map");
+  })
+
   $(".map-btn").click(function() {
-    game.player = new Player();
-    game.generateMap(game.player);
+    if ( game.done == true ) {
+      game.player = new Player();
+      game.generateMap(game.player);
+    }
   })
 
   $(document).on("click", "#map1Selector", function() {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 1);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map2Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 2);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map3Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 3);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map4Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 4);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map5Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 5);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map6Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 6);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map7Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 7);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map8Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 8);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map9Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 9);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
   })
 
   $(document).on("click", "#map10Selector", function () {
+    $("#dino").css("marginLeft", "160vw");
+    $("#character").css("marginLeft", "-80vw");
     localStorage.setItem("currentWorld", 10);
     game.player = new Player();
     game.initGame();
+    $(".cModalMap").hide();
+  })
+
+  $(document).on("click", ".closebtn", function() {
+    $(".cModalMap").hide();
   })
 
   // localStorage.removeItem("dinocoins");

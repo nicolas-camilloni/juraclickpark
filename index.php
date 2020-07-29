@@ -37,6 +37,8 @@ session_start();
                         </div>
                         <div class="ongletSkin">
                         </div>
+                        <div class="ongletMap">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -51,8 +53,8 @@ session_start();
             </div>
         </div>
         <div class="cModalMap">
-            <div class="modalMap">
-
+            <div class="modalMap shadow-lg">
+                <div class="closebtn"></div>
             </div>
         </div>
     </main>

@@ -7,6 +7,30 @@ class Dinosaur {
         else if ( player.currentWorld == "2" ) {
             var dinoChoice = ["dinostart", "dimetrodon"];
         }
+        else if (player.currentWorld == "3") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3"];
+        }
+        else if (player.currentWorld == "4") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4"];
+        }
+        else if (player.currentWorld == "5") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4", "dino5"];
+        }
+        else if (player.currentWorld == "6") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4", "dino5", "dino6"];
+        }
+        else if (player.currentWorld == "7") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4", "dino5", "dino6", "dino7"];
+        }
+        else if (player.currentWorld == "8") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4", "dino5", "dino6", "dino7", "dino8"];
+        }
+        else if (player.currentWorld == "9") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4", "dino5", "dino6", "dino7", "dino8", "dino9"];
+        }
+        else if (player.currentWorld == "10") {
+            var dinoChoice = ["dinostart", "dimetrodon", "dino3", "dino4", "dino5", "dino6", "dino7", "dino8", "dino9", "dino10"];
+        }
         else {
             var dinoChoice = ["dinostart"];
         }

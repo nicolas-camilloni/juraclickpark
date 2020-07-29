@@ -2,11 +2,13 @@ class Game {
 
     constructor() {
         this.player = new Player;
+        this.done = false;
     }
 
     // INITIALIZE THE GAME
 
     initGame() {
+        this.done = false;
         var isNewPlayer = localStorage.getItem('isNewPlayer');
         if (isNewPlayer == null) {
 
@@ -335,10 +337,11 @@ class Game {
             $("#dino").animate({
                 marginLeft: "0vw",
             }, 3400, () => {
-                clearInterval(walk);
+                clearInterval(walkdino);
                 this.dinoIdle("template/img/sprites/" + dinosaur.currentDino + "/", dinosaur, player);
+                this.done = true;
             })
-            var walk = setInterval(function () {
+            var walkdino = setInterval(function () {
                 $("#dino").attr("src", path + "Walk" + i + ".png");
                 if (i == 5) {
                     i = 1;
@@ -352,12 +355,13 @@ class Game {
             $("#dino").animate({
                 marginLeft: "0vw",
             }, 800, () => {
-                clearInterval(walk);
+                clearInterval(walkdino);
                 $(".cHealthBar").show();
                 $(".cHealthBarInner").show();
                 this.dinoIdle("template/img/sprites/" + dinosaur.currentDino + "/", dinosaur, player);
+                this.done = true;
             })
-            var walk = setInterval(function () {
+            var walkdino = setInterval(function () {
                 $("#dino").attr("src", path + "Walk" + i + ".png");
                 if (i == 5) {
                     i = 1;
@@ -367,11 +371,14 @@ class Game {
                 }
             }, 250);
         }
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(walkdino);
+        })
     }
 
     dinoIdle(path, dinosaur, player) {
         var i = 1;
-        var idle = setInterval( () => {
+        var idledino = setInterval( () => {
             if ( dinosaur.dinoHealth > 0) {
                 $("#dino").attr("src", path + "Idle" + i + ".png");
                 if (i == 5) {
@@ -383,10 +390,13 @@ class Game {
                 // console.log(dinosaur.dinoHealth);
             }
             else {
-                clearInterval(idle);
+                clearInterval(idledino);
                 this.dinoDead("template/img/sprites/" + dinosaur.currentDino + "/", player);
             }
         }, 150);
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(idledino);
+        })
     }
 
     dinoDead(path, player) {
@@ -405,7 +415,11 @@ class Game {
             else {
                 i++;
             }
+
         }, 100);
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(die);
+        })
     }
 
     // CHAR FUNCTIONS
@@ -428,6 +442,9 @@ class Game {
                 i++;
             }
         }, 250);
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(walk);
+        })
     }
 
     charIdle(path, player) {
@@ -452,7 +469,9 @@ class Game {
                 y++;
             }
         }, 200);
-
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(idle);
+        })
     }
 
     charAttack(path, player) {
@@ -468,6 +487,9 @@ class Game {
                 i++;
             }
         }, 75);
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(attack);
+        })
     }
 
     // IDLE EARNING
@@ -492,6 +514,9 @@ class Game {
             this.player = new Player();
             this.displayMyGold();
         }, 1000);
+        $(document).on("click", ".divSelector", function () {
+            clearInterval(timingIdle);
+        })
     }
 
 }
