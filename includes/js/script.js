@@ -197,5 +197,42 @@ $( document ).ready(function() {
     event.preventDefault();
   });
 
+  // UNLOCK MAP
+  $(document).on("click", ".btnUnlockMap", function() {
+    var id = this["id"];
+    if ( id == "btnMap2" ) {
+      var price = 5000;
+    }
+    else if ( id == "btnMap3" ) {
+      var price = 10000;
+    }
+    else if ( id == "btnMap4" ) {
+      var price = 20000;
+    }
+    else if ( id == "btnMap5" ) {
+      var price = 30000;
+    }
+    else if ( id == "btnMap6" ) {
+      var price = 40000;
+    }
+    else if ( id == "btnMap7" ) {
+      var price = 50000;
+    }
+    else if ( id == "btnMap8" ) {
+      var price = 60000;
+    }
+    else if ( id == "btnMap9" ) {
+      var price = 70000;
+    }
+    else if ( id == "btnMap10" ) {
+      var price = 80000;
+    }
+    game.shop.unlockMap(id, price);
+    game.shop = new Shop();
+    game.shop.generateShop("map");
+    game.player = new Player();
+    game.displayMyGold(game.player);
+  })
+
 
 })

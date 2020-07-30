@@ -255,28 +255,28 @@ class Game {
 
     generateWorld(level) {
         if ( level == 1 ) {
-            $("main").css("backgroundImage", "url('template/img/bg.jpg')");
+            $("main").css("backgroundImage", "url('template/img/bg.png')");
         }
         else if ( level == 2 ) {
             $("main").css("backgroundImage", "url('template/img/bg2.png')");
         }
         else if (level == 3) {
-            $("main").css("backgroundImage", "url('template/img/bg3.jpg')");
+            $("main").css("backgroundImage", "url('template/img/bg3.png')");
         }
         else if (level == 4) {
-            $("main").css("backgroundImage", "url('template/img/bg4.jpg')");
+            $("main").css("backgroundImage", "url('template/img/bg4.png')");
         }
         else if (level == 5) {
             $("main").css("backgroundImage", "url('template/img/bg5.png')");
         }
         else if (level == 6) {
-            $("main").css("backgroundImage", "url('template/img/bg6.jpg')");
+            $("main").css("backgroundImage", "url('template/img/bg6.png')");
         }
         else if (level == 7) {
-            $("main").css("backgroundImage", "url('template/img/bg7.jpg')");
+            $("main").css("backgroundImage", "url('template/img/bg7.png')");
         }
         else if (level == 8) {
-            $("main").css("backgroundImage", "url('template/img/bg8.jpg')");
+            $("main").css("backgroundImage", "url('template/img/bg8.png')");
         }
         else if (level == 9) {
             $("main").css("backgroundImage", "url('template/img/bg9.png')");

@@ -6,6 +6,7 @@ body {
     -ms-user-select: none;
     user-select: none;
     overflow: hidden;
+    cursor: url("../img/cursor.png"), auto;
 }
 
 main {
@@ -371,6 +372,19 @@ main {
     border: 5px solid whitesmoke;
 }
 
+.shopWorld {
+    height: 12vh;
+    width: 96%;
+    background-image: url(../img/clickerperks-texture.jpg);
+    background-size: 100%;
+    position: relative;
+    margin-top: 24px;
+    margin-left: 4px;
+    margin-bottom: 10px;
+    border-radius: 20px;
+    border: 5px solid whitesmoke;
+}
+
 .woodPanel {
     height: 50vh;
     width: 70%;
@@ -406,6 +420,8 @@ main {
     display: flex;
     flex-direction: row;
     height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 
 .cPerksInfos p {
@@ -511,6 +527,13 @@ main {
     height: 64px;
     width: 64px;
     border-radius: 50px;
+}
+
+.shopMapImg img {
+    height: 64px;
+    width: 64px;
+    border-radius: 50px;
+    border: 4px solid #21c1e9;
 }
 
 .perksBuy {
@@ -627,4 +650,10 @@ main {
 .closebtn:hover {
     background-image: url("../img/close-map-hover.png");
     background-size: 100% 100%;
+}
+
+.error {
+    color: white;
+    text-shadow: 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60, 0 0 2px #d60;
+    font-weight: bold;
 }

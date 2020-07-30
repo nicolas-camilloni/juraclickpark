@@ -2,6 +2,7 @@ class Shop {
     constructor() {
         this.perksClicker = localStorage.getItem("perksClicker");
         this.perksIdle = localStorage.getItem("perksIdle");
+        this.bestWorld = localStorage.getItem("bestWorld");
     }
     
     prettify(input) {
@@ -157,7 +158,7 @@ class Shop {
                 }
             });
         }
-        else if (whichPanel == "idle") {
+        else if ( whichPanel == "idle" ) {
             var back = this;
             // console.log(JSON.parse(this.perksClicker));
             var myIdlePerks = JSON.parse(this.perksIdle);
@@ -241,6 +242,83 @@ class Shop {
                 }
             });
         }
+        else if ( whichPanel == "map" ) {
+            var back = this;
+            var bestWorld = parseInt(this.bestWorld);
+            while ( bestWorld < 10 ) {
+                bestWorld++;
+                if ( bestWorld == 2 ) {
+                    var price = 5000;
+                    var mapName = "Prairie endormie";
+                }
+                else if ( bestWorld == 3 ) {
+                    var price = 10000;
+                    var mapName = "Désert de Buhwa";
+                }
+                else if ( bestWorld == 4 ) {
+                    var price = 20000;
+                    var mapName = "Mer du vent";
+                }
+                else if ( bestWorld == 5 ) {
+                    var price = 30000;
+                    var mapName = "Chemins japonnais";
+                }
+                else if ( bestWorld == 6 ) {
+                    var price = 40000;
+                    var mapName = "Plaines enneigées";
+                }
+                else if ( bestWorld == 7 ) {
+                    var price = 50000;
+                    var mapName = "Rivère gelée";
+                }
+                else if ( bestWorld == 8 ) {
+                    var price = 60000;
+                    var mapName = "Chateau hanté";
+                }
+                else if ( bestWorld == 9 ) {
+                    var price = 70000;
+                    var mapName = "Lavaland";
+                }
+                else if ( bestWorld == 10 ) {
+                    var price = 80000;
+                    var mapName = "L'entre magmatique";
+                }
+                if ( bestWorld <= parseInt((this.bestWorld)) + 1 ) {
+                    $(".woodPanel").append(`
+                        <div class="shopWorld shadow">
+                            <div class="cPerksInfos">
+                                <div class="shopMapImg">
+                                    <img class="img-fluid" src="template/img/bg${bestWorld}.png" width=44 height=44 alt="map${bestWorld}" />
+                                    </div>
+                                <div class="perksDesc">
+                                    <p class="perksName">${mapName}</p>
+                                </div>
+                                <div class="perksBuy">
+                                    <button id="btnMap${bestWorld}" class="btnUnlockPerks btnUnlockMap"><p>DEBLOQUER</p><div>${price}<img src="template/img/dinocoins.png" alt="dinocoins" /></div></button>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+                else {
+                    $(".woodPanel").append(`
+                        <div class="shopWorld shadow">
+                            <div class="cPerksInfos">
+                                <div class="shopMapImg">
+                                    <img class="img-fluid" src="template/img/bg${bestWorld}.png" width=44 height=44 alt="map${bestWorld}" />
+                                    </div>
+                                <div class="perksDesc">
+                                    <p class="perksName">${mapName}</p>
+                                </div>
+                                <div class="perksBuy">
+                                    <p class="error">Vérrouiller</p>
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+            }
+        }
     }
 
     getNextUpgradeInfo(bonus, level) {
@@ -248,6 +326,13 @@ class Shop {
         var newBonus = Math.round(bonus * level);
 
         return newBonus;
+    }
+
+    unlockMap(map, price) {
+        var bestWorld = parseInt(map.substring(6));
+        var newBalance = parseInt(localStorage.getItem("dinocoins")) - parseInt(price);
+        localStorage.setItem("bestWorld", bestWorld);
+        localStorage.setItem("dinocoins", newBalance);
     }
     
     upgradePerksClicker(name, price, bonus, rateGrowth, level, isUnlock = true ) {
